@@ -3,15 +3,44 @@ import './App.css';
 
 function App() {
   const [display, setDisplay] = useState('0');
+
   const handleNumber = (event) => {
     const number = event.target.textContent;
-    setDisplay(number);
+
+    if (display === '0') {
+      setDisplay(number);
+    } else {
+      setDisplay(display + number);
+    }
   };
+
+  const handleOperator = (event) => {
+    const operator = event.target.textContent;
+    setDisplay(display + ' ' + operator + ' ');
+  };
+
+  const handleEqual = () => {
+    setDisplay(eval(display));
+  };
+
+  const handleDecimal = () => {
+    const array = display.split(' ');
+    const lastElement = array[array.length -1];
+
+    if (!lastElement.includes('.')) {
+      setDisplay(display + '.');
+    }
+  };
+
+  const handleClear = () => {
+    setDisplay('0');
+  };
+    
   return (
     <div className="App">
       <div className="calculator">
         <div id="display" className="row">{display}</div>
-        <div id="clear" className="row">
+        <div id="clear" className="row" onClick={handleClear}>
           AC
         </div>
         <div id="seven" onClick={handleNumber}>
@@ -23,7 +52,7 @@ function App() {
         <div id="nine" onClick={handleNumber}>
           9
         </div>
-        <div id="multiply">*</div>
+        <div id="multiply" onClick={handleOperator}>*</div>
         <div id="four" onClick={handleNumber}>
           4
         </div>
@@ -33,7 +62,7 @@ function App() {
         <div id="six" onClick={handleNumber}>
           6
         </div>
-        <div id="divide" onClick={handleNumber}>/</div>
+        <div id="divide" onClick={handleOperator}>/</div>
         <div id="one" onClick={handleNumber}>
           1
         </div>
@@ -43,13 +72,13 @@ function App() {
         <div id="three" onClick={handleNumber}>
           3
         </div>
-        <div id="add">+</div>
+        <div id="add" onClick={handleOperator}>+</div>
         <div id="zero" onClick={handleNumber}>
           0
         </div>
-        <div id="decimal">.</div>
-        <div id="equals">=</div>
-        <div id="subtract">-</div>
+        <div id="decimal" onClick={handleDecimal}>.</div>
+        <div id="equals" onClick={handleEqual}>=</div>
+        <div id="subtract" onClick={handleOperator}>-</div>
       </div>;
     </div>
   );
