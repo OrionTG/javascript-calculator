@@ -79,7 +79,7 @@ function App() {
         <div id="decimal" onClick={handleDecimal}>.</div>
         <div id="equals" onClick={handleEqual}>=</div>
         <div id="subtract" onClick={handleOperator}>-</div>
-      </div>;
+      </div>
     </div>
   );
 }
